@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:spotfire/drawer/spotfire_drawer.dart';
 import 'package:spotfire/home_screen/home_view_model.dart';
 import 'package:spotfire/iots_screen/iots_screen.dart';
+import 'package:spotfire/valve_control_screen/valve_control_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -27,7 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListView(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32),
                 children: [
-                  buildGasNivelBody(_gas),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ValveControlScreen(),
+                            ));
+                      },
+                      child: buildGasNivelBody(_gas)),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -118,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Desligar o gás',
+                    'Cozinha segura',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -173,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Desligar o gás',
+                    'Cuidado!',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -183,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 8,
                   ),
                   Text(
-                    'Cuidado!\nGás próximo do nível perigoso\nNível do gás: ${_gas['nivel']}',
+                    'Gás próximo do nível perigoso\nNível do gás: ${_gas['nivel']}',
                   ),
                 ],
               ),
@@ -231,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Desligar o gás',
+                    'PERIGO! GÁS DESLIGADO AUTOMATICAMENTE',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -241,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 8,
                   ),
                   Text(
-                    'Cuidado!\nGás em nível perigoso\nNível do gás: ${_gas['nivel']}',
+                    'Gás em nível perigoso\nNível do gás: ${_gas['nivel']}',
                   ),
                 ],
               ),
