@@ -58,4 +58,17 @@ class HomeViewModel extends ChangeNotifier {
         ),
         (route) => false);
   }
+
+  Future<void> openAndCloseValve(bool value) async {
+    var iot = await iotsCollection.where('name', isEqualTo: 'VALVE').get();
+
+    await iotsCollection.doc(iot.docs.first.id).update(
+      {
+        "isOpen": value,
+      },
+    );
+    int index = iotsList.indexWhere((element) => element['name'] == 'VALVE');
+    iotsList[index]['isOpen'] = value;
+    notifyListeners();
+  }
 }
